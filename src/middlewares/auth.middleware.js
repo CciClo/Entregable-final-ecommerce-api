@@ -10,7 +10,7 @@ const authMiddleware = (req, res, next) => {
         if(error) {
             res.status(400).json({
                 error: "Invalid token",
-                message: ""
+                message: "Get a new token"
             });
         }else {
             req.user = decode;
