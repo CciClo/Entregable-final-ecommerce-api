@@ -12,7 +12,7 @@ const register = async (req, res) => {
       res.status(201).json({ message: "user created" });
       await transporter.sendMail({
         to: result.email,
-        from: process.env.EMAIL, //"tato.tandioy@gmail.com"
+        from: process.env.EMAIL,
         subjetc: "Email confirmation",
         html: "<h1>Bienvenido a la mejor app de chat creada por mi</h1> <p>Tienes que confirmar tu email</p><p> Solo haz click en el siguiente <a href='#'' target='new_blank'> enlace </a>",
       });
