@@ -8,7 +8,7 @@ const router = Router();
 
 router.post("/register", register);
 router.post("/login", login);
-router.post('/confirm', VerifyVerificationToken)
+router.post('/confirm', VerifyVerificationToken);
 
 module.exports = router; // ahorita lo usamos en app
 

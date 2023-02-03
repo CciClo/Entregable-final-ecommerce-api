@@ -33,7 +33,8 @@ class AuthServices {
         const isValid = bcrypt.compareSync(password, user.password);
         if ( isValid ) {
 
-          return user.isConfirmed ? {isValid: false, message: "confirm account"}  :  { isValid, user };
+          // return user.isConfirmed ? {isValid: false, message: "confirm account"}  :  { isValid, user };
+          return {isValid};
         };
         return { isValid, message: "password no coincide" };
       }
