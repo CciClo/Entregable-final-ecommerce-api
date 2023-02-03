@@ -1,4 +1,5 @@
 const { AccountConfirmationEmail } = require("../middlewares/email.middleware");
+const Users = require("../models/users.models");
 const AuthServices = require("../services/auth.services");
 const CartServices = require("../services/cart.services");
 const transporter = require("../utils/mailer");
@@ -66,26 +67,9 @@ const login = async (req, res) => {
   };
 };
 
-const AccountConfirmation = async (req, res) => {
-  const {token, userId}  = req.body;
-  console.log("--------------------------->  Esta", req.body);
-
-  try {
-    const result = await AuthServices.VerifyVerificationToken(token, userId);
-    if (result) {
-      res.json({message: "Confirm"});
-    }else {
-      res.status(400).json({message: "get new token"});
-    }
-  } catch (error) {
-    res.status(400).json(error);
-  }
-  
-  res.status(400).json({message: "You"});
-};
 
 module.exports = {
   register,
   login,
-  AccountConfirmation,
+
 };

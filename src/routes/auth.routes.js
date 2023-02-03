@@ -1,13 +1,14 @@
 // registro
 // login
 const { Router } = require("express");
-const { register, login, AccountConfirmation } = require("../controllers/auth.controller");
+const { register, login } = require("../controllers/auth.controller");
+const { VerifyVerificationToken } = require("../middlewares/email.middleware");
 
 const router = Router();
 
 router.post("/register", register);
 router.post("/login", login);
-router.post('/confirm', AccountConfirmation)
+router.post('/confirm', VerifyVerificationToken)
 
 module.exports = router; // ahorita lo usamos en app
 

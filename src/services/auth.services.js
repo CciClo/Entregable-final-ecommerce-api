@@ -55,20 +55,6 @@ class AuthServices {
     };
   };
 
-  static async VerifyVerificationToken (token, userId) {
-    try {
-      jwt.verify(token, process.env.JWT_SECRET, {algorithms: "HS512"}, async (error, decode) => {
-        if(error) {
-          return false
-        }else {
-          await Users.update({isConfirmed: true}, {where: {id: userId}});
-          return true
-        }
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
 
 };
 

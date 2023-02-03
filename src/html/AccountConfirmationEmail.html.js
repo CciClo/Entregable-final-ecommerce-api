@@ -2,7 +2,8 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const HTML =  (data) => {
-    const token = jwt.sign(data, process.env.JWT_SECRET, {expiresIn: "1m", algorithm: "HS512"});
+    const token = jwt.sign(data, process.env.JWT_SECRET, {expiresIn: "1d", algorithm: "HS512"});
+    console.log(token);
     return (
         `
         <!DOCTYPE html>
