@@ -26,7 +26,7 @@ const products = [
     {"name": "borrador", "price": 500, "availableQty": 500, "user_id": 3, "image_url": "http://borrador.com"},
 ];
 
-// initModels();
+initModels();
 db.sync({force: true}) 
     .then(() => {
         users.forEach(user => Users.create(user));

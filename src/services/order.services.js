@@ -62,6 +62,7 @@ class OrderServices {
     static async addProduct (body) {
         try {
             const result = await ProductInOrder.create(body);
+            return result;
         } catch (error) {
             throw error;
         }

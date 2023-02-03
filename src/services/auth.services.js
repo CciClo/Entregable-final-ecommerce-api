@@ -2,8 +2,9 @@ const Users = require("../models/users.models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Cart = require("../models/cart.models");
-
 require("dotenv").config();
+
+
 
 class AuthServices {
   static async register(user) {
@@ -30,9 +31,13 @@ class AuthServices {
       // console.log(user);
       if (user) {
         const isValid = bcrypt.compareSync(password, user.password);
-        return isValid ? { isValid, user } : { isValid };
+        if ( isValid ) {
+
+          return user.isConfirmed ? {isValid: false, message: "confirm account"}  :  { isValid, user };
+        };
+        return { isValid, message: "password no coincide" };
       }
-      return { isValid: false };
+      return { isValid: false, message: "user not found" };
     } catch (error) {
       throw error;
     };
@@ -48,6 +53,21 @@ class AuthServices {
     } catch (error) {
       throw error;
     };
+  };
+
+  static async VerifyVerificationToken (token, userId) {
+    try {
+      jwt.verify(token, process.env.JWT_SECRET, {algorithms: "HS512"}, async (error, decode) => {
+        if(error) {
+          return false
+        }else {
+          await Users.update({isConfirmed: true}, {where: {id: userId}});
+          return true
+        }
+      });
+    } catch (error) {
+      throw error;
+    }
   };
 
 };

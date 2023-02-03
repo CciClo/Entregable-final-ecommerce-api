@@ -1,3 +1,4 @@
+const { AccountConfirmationEmail } = require("../middlewares/email.middleware");
 const AuthServices = require("../services/auth.services");
 const CartServices = require("../services/cart.services");
 const transporter = require("../utils/mailer");
@@ -7,15 +8,19 @@ const register = async (req, res) => {
   try {
     const user = req.body;
     const result = await AuthServices.register(user);
+    
     if (result) {
       await CartServices.create(result.id);
       res.status(201).json({ message: "user created" });
+      /*
       await transporter.sendMail({
         to: result.email,
         from: process.env.EMAIL,
         subjetc: "Email confirmation",
         html: "<h1>Bienvenido a la mejor app de chat creada por mi</h1> <p>Tienes que confirmar tu email</p><p> Solo haz click en el siguiente <a href='#'' target='new_blank'> enlace </a>",
       });
+      */
+      await AccountConfirmationEmail({email: result.email});
     } else {
       res.status(400).json({ message: "somethign wrong" });
     }
@@ -52,7 +57,7 @@ const login = async (req, res) => {
       userData.token = token;
       res.json(userData);
     } else {
-      res.status(400).json({ message: "user not found" });
+      res.status(400).json({ message: result.message });
     }
     // usuario no encontrado
     // contraseña incorrecta
@@ -61,7 +66,26 @@ const login = async (req, res) => {
   };
 };
 
+const AccountConfirmation = async (req, res) => {
+  const {token, userId}  = req.body;
+  console.log("--------------------------->  Esta", req.body);
+
+  try {
+    const result = await AuthServices.VerifyVerificationToken(token, userId);
+    if (result) {
+      res.json({message: "Confirm"});
+    }else {
+      res.status(400).json({message: "get new token"});
+    }
+  } catch (error) {
+    res.status(400).json(error);
+  }
+  
+  res.status(400).json({message: "You"});
+};
+
 module.exports = {
   register,
   login,
+  AccountConfirmation,
 };
