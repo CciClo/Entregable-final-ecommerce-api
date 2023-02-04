@@ -2,8 +2,21 @@ const HTML = require("../html/AccountConfirmationEmail.html");
 const transporter = require("../utils/mailer");
 const jwt = require("jsonwebtoken");
 const Users = require("../models/users.models");
+const HTMLSEndConfirm = require("../html/SendAccounComfirmation.html");
 require("dotenv").config();
 
+
+const SendConfirmationPage = async (req, res)  =>{
+    const id = req.params;
+    
+    try {
+        const result =  HTMLSEndConfirm(id);
+
+        res.send(result);
+    } catch (error) {
+        res.status(400).json(error);
+    }
+};
 
 const AccountConfirmationEmail = async (date) => {
     try {
@@ -35,7 +48,10 @@ const VerifyVerificationToken = async (req, res, next) => {
       });
 };
 
+
+
 module.exports = {
     AccountConfirmationEmail,
     VerifyVerificationToken,
+    SendConfirmationPage
 };

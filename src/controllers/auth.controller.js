@@ -21,7 +21,7 @@ const register = async (req, res) => {
         html: "<h1>Bienvenido a la mejor app de chat creada por mi</h1> <p>Tienes que confirmar tu email</p><p> Solo haz click en el siguiente <a href='#'' target='new_blank'> enlace </a>",
       });
       */
-      await AccountConfirmationEmail({email: result.email});
+      await AccountConfirmationEmail({email: result.email, id : result.id});
     } else {
       res.status(400).json({ message: "somethign wrong" });
     }
