@@ -10,10 +10,12 @@
 
 <body>
     <div class="container">
-        <h2>Confirm your account</h2>
-        <p>This is only a message for user confirmation please click on the button to confirm, this token will expire,
-            you can request another on the page</p>
-        <button class="updateComfirm" onclick="updateComfirm()">click</button>
+        <div>
+            <h2>Confirm your account</h2>
+            <p>This is only a message for user confirmation please click on the button to confirm, this token will expire,
+                you can request another on the page</p>
+            <button class="updateComfirm" onclick="updateComfirm()">click</button>
+        </div>
         <!-- <a href="http://localhost:8000/docs/#/" target="_blank">
             click to confirm
         </a> -->
@@ -36,8 +38,27 @@
         justify-content: center;
         justify-items: center;
         align-items: center;
+        flex-direction: column;
+    }
+
+    .container div {
+        width: 20vw;
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
         gap: 5vw;
         flex-direction: column;
+        background-color: rgba(17, 0, 255, 0.185);
+        backdrop-filter: blur(3%);
+        padding: 40px;
+        border-radius: 30px;
+        box-shadow: 0 0 40px 30px black;
+        transition: box-shadow 2s;
+    }
+
+    .container div:hover {
+        box-shadow: 0 0 60px 30px rgba(0, 0, 0, 0.603);
     }
 
     .updateComfirm {
@@ -45,6 +66,8 @@
         padding: 10px;
         border-radius: 10px;
     }
+
+    
 </style>
 <script>
 
