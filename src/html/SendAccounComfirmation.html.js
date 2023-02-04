@@ -1,11 +1,10 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const HTMLSEndConfirm =  (data) => {
+const HTMLSEndConfirm =  (token) => {
     
     // return "<h1> Hola </h1>"
-    const token = jwt.sign(data, process.env.JWT_SECRET, {expiresIn: "1d", algorithm: "HS512"});
-
+    
     return (
         `
         
@@ -62,7 +61,7 @@ const HTMLSEndConfirm =  (data) => {
 
     
     @media (max-width: 500px) {
-        .container div {
+        .container .message {
             width: 70%;
             height: 20vh;
         }
@@ -89,8 +88,7 @@ const HTMLSEndConfirm =  (data) => {
             // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
             const body = JSON.stringify({
-                userId: ${data.id},
-                token: '${token}',
+                token: '${token}'
             });
             xhr.onload = () => {
                 var data = JSON.parse(xhr.responseText);

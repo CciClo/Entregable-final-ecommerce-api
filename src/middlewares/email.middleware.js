@@ -7,10 +7,11 @@ require("dotenv").config();
 
 
 const SendConfirmationPage = async (req, res)  =>{
-    const id = req.params;
+    const {token} = req.params;
+
     
     try {
-        const result =  HTMLSEndConfirm(id);
+        const result =  HTMLSEndConfirm(token);
 
         res.send(result);
     } catch (error) {
@@ -34,14 +35,15 @@ const AccountConfirmationEmail = async (date) => {
 };
 
 const VerifyVerificationToken = async (req, res, next) => {
-    const {token, userId} = req.body
+    const {token} = req.body
+    console.log("---------------------------------------<",token);
 
     jwt.verify(token, process.env.JWT_SECRET, {algorithms: "HS512"}, async (error, decode) => {
         if(error) {
           res.status(400).json(error);
           
         }else {
-          await Users.update({isConfirmed: true}, {where: {id: userId}});
+          await Users.update({isConfirmed: true}, {where: {id: decode.id}});
           res.json({message: "confirm"});
           next();
         }

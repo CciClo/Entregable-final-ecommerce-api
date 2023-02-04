@@ -3,6 +3,10 @@ require("dotenv").config();
 
 const HTML =  (data) => {
 
+    const token = jwt.sign(data, process.env.JWT_SECRET, {expiresIn: "1d", algorithm: "HS512"});
+
+    // console.log(token);
+
     return (
         `
             
@@ -12,7 +16,7 @@ const HTML =  (data) => {
                 <p>This is only a message for user confirmation please click on the link to confirm, this token will expire,
                     you can request another on the page
                 </p>
-                <a href="${process.env.URL}/auth/getConfirm/${data.id}"  target="_blank">
+                <a href="${process.env.URL}/auth/getConfirm/${token}"  target="_blank">
                     click to confirm
                 </a>
             </div>

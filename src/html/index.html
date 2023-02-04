@@ -93,8 +93,6 @@
             } else {
                 console.log(`Error: ${xhr.status}`);
                 console.log(data);
-                const body = document.querySelector(".constainer");
-                body.innerHTML = "<h1> Cuenta confirmada </h1>"
             }
         };
         xhr.send(body);
