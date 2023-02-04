@@ -84,7 +84,7 @@ const HTMLSEndConfirm =  (data) => {
         
     const updateComfirm = () => {
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", "${process.env.URL}:8000/auth/confirm"); /// cambiar o borrar el  :8000
+            xhr.open("POST", "${process.env.URL}/auth/confirm"); /// cambiar o borrar el  :8000
             // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
             const body = JSON.stringify({
