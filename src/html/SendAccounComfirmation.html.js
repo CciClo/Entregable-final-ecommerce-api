@@ -10,15 +10,18 @@ const HTMLSEndConfirm =  (data) => {
         `
         
             
-        <body>
-            <div class="container">
-                <h2>Confirm your account</h2>
-                <p>
-                    Only one step is left to confirm your account
-                </p>
-                <button class="updateComfirm" onclick="updateComfirm()">click</button>
-            </div>
-        </body>
+<body>
+    <div class="container">
+        <div>
+            <h2>Confirm your account</h2>
+            <p>
+                Only one step is left to confirm your account
+            </p>
+            <button class="updateComfirm" onclick="updateComfirm()">click</button>
+        </div>
+    </div>
+    
+</body>
         
 <style>
     * {
