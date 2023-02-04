@@ -12,7 +12,7 @@ const HTMLSEndConfirm =  (data) => {
             
 <body>
     <div class="container">
-        <div>
+        <div class="message" >
             <h2>Confirm your account</h2>
             <p>
                 Only one step is left to confirm your account
@@ -59,6 +59,14 @@ const HTMLSEndConfirm =  (data) => {
         transition: box-shadow 2s;
     }
 
+    
+    @media (max-width: 500px) {
+        .container div {
+            width: 70%;
+            height: 20vh;
+        }
+    }
+
     .container div:hover {
         box-shadow: 0 0 60px 30px rgba(0, 0, 0, 0.603);
     }
@@ -76,7 +84,7 @@ const HTMLSEndConfirm =  (data) => {
         
     const updateComfirm = () => {
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", "${process.env.URL}/auth/confirm"); /// cambiar o borrar el  :8000
+            xhr.open("POST", "${process.env.URL}:8000/auth/confirm"); /// cambiar o borrar el  :8000
             // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
             const body = JSON.stringify({
@@ -87,6 +95,9 @@ const HTMLSEndConfirm =  (data) => {
                 var data = JSON.parse(xhr.responseText);
                 if (xhr.readyState == 4 && xhr.status == "200") {
                     console.log(data);
+                    const container = document.querySelector(".message");
+                    container.innerHTML = "<h1> Account confirmed </h1>"
+                    container.style = "height: 40vh"
                 } else {
                     console.log(data);
                 }

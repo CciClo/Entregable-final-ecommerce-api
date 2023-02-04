@@ -57,6 +57,12 @@
         transition: box-shadow 2s;
     }
 
+    @media (max-width: 500px) {
+        .container div {
+            width: 70%;
+        }
+    }
+
     .container div:hover {
         box-shadow: 0 0 60px 30px rgba(0, 0, 0, 0.603);
     }
@@ -87,6 +93,8 @@
             } else {
                 console.log(`Error: ${xhr.status}`);
                 console.log(data);
+                const body = document.querySelector(".constainer");
+                body.innerHTML = "<h1> Cuenta confirmada </h1>"
             }
         };
         xhr.send(body);
