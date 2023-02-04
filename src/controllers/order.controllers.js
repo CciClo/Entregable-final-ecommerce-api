@@ -16,7 +16,7 @@ const AddProductsToOrder = async (req, res) => {
     try {
         const cartFound = await CartServices.getProducts(cart.id);
         
-        if ( cartFound ) {
+        if ( cartFound?.total_price > 0 ) {
 
             const cartResult = await CartServices.emptyingTheCart(cartFound.products, cartFound, userId);
             
